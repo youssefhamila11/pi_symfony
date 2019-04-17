@@ -1,0 +1,15 @@
+youssef_front_homepage:
+    path:     /
+    defaults: { _controller: YoussefFrontBundle:Default:index }
+youssef_front_recherche_offres:
+    path:     /rechercheOffres
+    defaults: { _controller: YoussefFrontBundle:Offre:rechercheOffres }
+youssef_front_afficheCalcule_offres:
+    path:     /afficheCalculeOffres
+    defaults: { _controller: YoussefFrontBundle:Offre:afficheOffresCalcule }
+youssef_front_affiche_offre:
+    path:     /afficheOffre/{id}/{conjoint}/{enfant}/{montant}
+    defaults: { _controller: YoussefFrontBundle:Offre:afficheOffre }
+youssef_front_souscrire_souscription:
+    path:     /souscrire
+    defaults: { _controller: YoussefFrontBundle:Souscription:souscrireView }

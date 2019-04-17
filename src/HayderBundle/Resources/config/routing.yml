@@ -1,0 +1,19 @@
+hayder_demande:
+    resource: "@HayderBundle/Resources/config/routing/demande.yml"
+    prefix:   /demande
+
+hayder_reclamation:
+    resource: "@HayderBundle/Resources/config/routing/reclamation.yml"
+    prefix:   /reclamation
+
+stat:
+    path:     /stat
+    defaults: { _controller: HayderBundle:Default:stat }
+
+pdf:
+    path:     /pdf
+    defaults: { _controller: HayderBundle:Default:pdf }
+
+recherche_demande:
+    path:   /rech/dde
+    defaults: { _controller: HayderBundle:Demande:recherche }

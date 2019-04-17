@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div id="qbootstrap-services">
+        <div class="container">
+            <div class="qbootstrap-departments">
+                <div class="row">
+                    <div class="department-wrap animate-box">
+                        <div class="grid-1 col-md-6" style="background-image: url(images/img_bg_1.jpg);"></div>
+
+                        <div class="grid-2 col-md-6">
+
+                            <div class="desc">
+                                <h2><a href="departments-single.html">{{ offre.Assureur.nomAssureur }}</a></h2>
+                                <div class="department-info">
+                                    <div class="block">
+                                        <h2><a href="doctors-single.html">Plafond Operation</a></h2>
+                                        <span>{{ offre.id }} DT</span>
+                                        <h2><a href="doctors-single.html">Pourcentage Operation</a></h2>
+                                        <span>{{ offre.pourcentageOperationOffre }} %</span>
+                                    </div>
+                                    <div class="block">
+                                        <h2><a href="doctors-single.html">Plafond Medicament</a></h2>
+                                        <span>{{ offre.plafondMedicamentOffre }} DT</span>
+                                        <h2><a href="doctors-single.html">Pourcentage Medicament</a></h2>
+                                        <span>{{ offre.pourcentageMedicamentOffre }} %</span>
+                                    </div>
+                                    <div class="block">
+                                        <h2><a href="doctors-single.html">Plafond visite</a></h2>
+                                        <span>{{ offre.plafondVisiteOffre }} DT</span>
+                                        <h2><a href="doctors-single.html">Pourcentage visite</a></h2>
+                                        <span>{{ offre.pourcentageVisiteOffre }} %</span>
+                                    </div>
+                                    <br>
+                                    <h3>prix : {{ montant }} </h3>
+                                    <form method="get" action="{{ path('youssef_front_souscrire_souscription') }}">
+                                        <label>tranche     </label>
+
+                                        <select name="tranche" >
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="6">6</option>
+
+                                        </select>
+                                        <input type="hidden" value="9" name="idOffre"/>
+                                        <input type="hidden" value="{{ c }}" name="conjoint"/>
+                                        <input type="hidden" name="enfant" value="{{ e }}"/>
+                                        <input type="hidden" value="{{ montant }}" name="montant"/>
+
+
+
+
+                                        <input type="submit" value="souscrire" >
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock  %}

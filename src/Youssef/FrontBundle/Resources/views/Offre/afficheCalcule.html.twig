@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div id="qbootstrap-services">
+        <div class="container">
+            <div class="row animate-box">
+                <div class="col-md-6 col-md-offset-3 text-center qbootstrap-heading">
+                    <h2>Our Services</h2>
+                    <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                </div>
+            </div>
+            {% if c=="non" %}
+            <div class="row">
+                {% for offre in offres %}
+                    <div class="col-md-4 animate-box">
+                        <div class="services">
+						<span class="icon">
+							<i class="icon-flow-merge"></i>
+						</span>
+                            <div class="desc">
+                                <h3><a href="{{ path('youssef_front_affiche_offre',{id : offre.id,conjoint : 0,enfant : e , montant : offre.PrixDeBaseOffre+((offre.PrixDeBaseOffre*e*offre.PrEnfant)/100)}) }}">{{ offre.Assureur.nomAssureur }}</a></h3>
+                                <p>{{ offre.prixDeBaseOffre }}</p>
+                                <br>
+                                <p>{{ offre.PrixDeBaseOffre+((offre.PrixDeBaseOffre*e*offre.PrEnfant)/100) }} dt</p>
+                </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+                {% endif %}
+            {% if c=="oui" %}
+                <div class="row">
+                    {% for offre in offres %}
+                        <div class="col-md-4 animate-box">
+                            <div class="services">
+						<span class="icon">
+							<i class="icon-flow-merge"></i>
+						</span>
+                                <div class="desc">
+                                    <h3><a href="{{ path('youssef_front_affiche_offre',{id : offre.id,conjoint : 1,enfant : e ,montant : offre.PrixDeBaseOffre+((offre.PrixDeBaseOffre*offre.PrConjoint)/100)+((offre.PrixDeBaseOffre*e*offre.PrEnfant)/100)}) }}">{{ offre.Assureur.nomAssureur }}</a></h3>
+                                    <p>{{ offre.prixDeBaseOffre }}</p>
+                                    <br>
+                                    <p>{{ offre.PrixDeBaseOffre+((offre.PrixDeBaseOffre*offre.PrConjoint)/100)+((offre.PrixDeBaseOffre*e*offre.PrEnfant)/100) }} dt</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock  %}
