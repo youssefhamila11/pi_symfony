@@ -66,6 +66,38 @@ class Reclamation
 
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="date", type="date", length=255, nullable=true)
+     */
+    private $date;
+
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+
+    /**
+     * @return string
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param string $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+
+
+
+    /**
      * Set user
      *
      * @param \AppBundle\Entity\User $user

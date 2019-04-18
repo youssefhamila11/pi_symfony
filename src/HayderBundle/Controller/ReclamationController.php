@@ -4,6 +4,7 @@ namespace HayderBundle\Controller;
 
 use HayderBundle\Entity\Reclamation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -26,6 +27,25 @@ class ReclamationController extends Controller
             'reclamations' => $reclamations,
         ));
     }
+
+    public function rechercheAction(){
+        $em = $this->getDoctrine()->getManager();
+
+        $reclamations = $em->getRepository(Reclamation::class)->recherche($_GET['critere']);
+        $resp = "";
+        foreach ($reclamations as $reclamation) {
+            $resp .= "<tr> <td><a href='/hayder%20pi/web/app_dev.php/hayder/reclamation/".$reclamation->getId()."/show'>".$reclamation->getId()."</a></td><td>".$reclamation->getUser()."</td>
+<td>".$reclamation->getEtat()."</td>
+<td>".$reclamation->getTypeReclamation()."</td>
+<td>".$reclamation->getTexteLibre()."</td>
+<td>".$reclamation->getPieceJointe()."</td>
+<td>".$reclamation->getDate()."</td>
+<td><a href='/hayder%20pi/web/app_dev.php/hayder/pdf/".$reclamation->getReponse()."'>Reponse</a></td>
+  </tr>";
+        }
+        return new JsonResponse($resp);
+    }
+
 
     /**
      * Creates a new reclamation entity.

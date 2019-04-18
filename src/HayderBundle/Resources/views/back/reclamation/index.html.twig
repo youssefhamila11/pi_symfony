@@ -21,6 +21,7 @@
                 <th>{{ knp_pagination_sortable(reclamations, 'Type reclamation', 'a.typeReclamation') }}</th>
                 <th>{{ knp_pagination_sortable(reclamations, 'Texte libre', 'a.texteLibre') }}</th>
                 <th>{{ knp_pagination_sortable(reclamations, 'Piece jointe', 'a.pieceJointe') }}</th>
+                <th>{{ knp_pagination_sortable(reclamations, 'Date', 'a.date') }}</th>
                 <th>{{ knp_pagination_sortable(reclamations, 'reponse', 'a.reponse') }}</th>
                 <th>Actions</th>
             </tr>
@@ -33,6 +34,7 @@
                 <td>{{ reclamation.typeReclamation }}</td>
                 <td>{{ reclamation.texteLibre }}</td>
                 <td>{{ reclamation.pieceJointe }}</td>
+                <td>{{ reclamation.date|date }}</td>
                 <td>{{ reclamation.reponse }}</td>
                 <td>
                     <ul>
@@ -49,4 +51,15 @@
         {{ knp_pagination_render(reclamations) }}
     </div>
                 </div></div></div></div></div>
+
+
+    <center>
+        <br><br><br><br>
+        <div id="div_chart"></div>
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            {{ gc_draw(piechart, 'div_chart') }}
+        </script>
+    </center>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace HayderBundle\Controller;
 
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use HayderBundle\Entity\Demande;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,8 +28,40 @@ class DemandeBackController extends Controller
         );
 
 
+        $em = $this->getDoctrine()->getManager();
+        $demandes= $em->getRepository(Demande::class)->findAll();
+        $demande1 = 0;
+        $demande2 = 0;
+        $demande3 = 0;
+        foreach ($demandes as $demande) {
+            if($demande->getTypeDemande() == "Demande d informations sur les procédures")
+                $demande1++;
+            if($demande->getTypeDemande() == "Demande d informations sur les garanties")
+                $demande2++;
+            if($demande->getTypeDemande() == "Demande d informations sur adhésion")
+                $demande3++;
+        }
+        $pieChart = new PieChart();
+        $pieChart->getData()->setArrayToDataTable(
+            [['Task', 'Hours per Day'],
+                ['Demande d informations sur les procédures',      $demande1],
+                ['Demande d informations sur les garanties',      $demande2],
+                ['Demande d informations sur adhésion',      $demande3]
+            ]
+        );
+        $pieChart->getOptions()->setTitle('Demandes');
+        $pieChart->getOptions()->setHeight(500);
+        $pieChart->getOptions()->setWidth(900);
+        $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
+        $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+
+
         return $this->render('@HayderBundle/back/demande/index.html.twig', array(
             'demandes' => $pagination,
+            'piechart'=> $pieChart,
         ));
     }
 

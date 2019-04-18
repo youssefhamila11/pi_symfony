@@ -39,7 +39,7 @@
                 <td>{{ demande.typeSoin }}</td>
                 <td>{{ demande.texteLibre }}</td>
                 <td>{{ demande.pieceJointe }}</td>
-                <td>{{ demande.date }}</td>
+                <td>{{ demande.date|date }}</td>
                 <td>{{ demande.reponse }}</td>
                 <td>
                     <ul>
@@ -56,4 +56,14 @@
                             {{ knp_pagination_render(demandes) }}
                         </div>
                     </div></div></div></div></div>
+
+<center>
+    <br><br><br><br>
+    <div id="div_chart"></div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        {{ gc_draw(piechart, 'div_chart') }}
+    </script>
+</center>
 {% endblock %}

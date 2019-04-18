@@ -16,7 +16,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $reclamations = $em->getRepository(Reclamation::class)->findAll();
         $demandes= $em->getRepository(Demande::class)->findAll();
-
+        $infoproc = [];
         $pieChart = new PieChart();
         $pieChart->getData()->setArrayToDataTable(
             [['Task', 'Hours per Day'],
@@ -37,9 +37,9 @@ class DefaultController extends Controller
     }
 
 
-    public function pdfAction()
+    public function pdfAction($reponse)
     {
-        $html = $this->renderView('@HayderBundle/Default/pdf.html.twig', array(
+        $html = $this->renderView('@HayderBundle/Default/pdf.html.twig', array('reponse'=>$reponse
 
         ));
 

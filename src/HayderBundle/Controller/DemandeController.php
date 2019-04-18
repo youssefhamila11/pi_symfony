@@ -106,16 +106,16 @@ class DemandeController extends Controller
         $demandes = $em->getRepository(Demande::class)->recherche($_GET['critere']);
         $resp = "";
         foreach ($demandes as $demande) {
-            $resp .= "<tr> <td>".$demande->getId()."</td><td>".$demande->getUser()."</td>
+            $resp .= "<tr> <td><a href='/hayder%20pi/web/app_dev.php/hayder/demande/".$demande->getId()."/show'>".$demande->getId()."</a></td><td>".$demande->getUser()."</td>
 <td>".$demande->getEtat()."</td>
 <td>".$demande->getTypeDemande()."</td>
 <td>".$demande->getMotif()."</td>
 <td>".$demande->getTypeSoin()."</td>
 <td>".$demande->getTexteLibre()."</td>
 <td>".$demande->getPieceJointe()."</td>
-<td>".$demande->getReponse()."</td>   </tr>";
+<td>".$demande->getDate()."</td>
+<td><a href='/hayder%20pi/web/app_dev.php/hayder/pdf/".$demande->getReponse()."'>Reponse</a></td>   </tr>";
         }
-        dump($demandes);
         return new JsonResponse($resp);
     }
 

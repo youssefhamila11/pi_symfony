@@ -110,6 +110,7 @@
                                             <center>
                                             <p><a href="#">Sans bouger </a></p>
                                             </center>
+                                        </center>
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +119,6 @@
                         <div class="col-xs-12 text-center">
                             <div class="menu-1">
                                 <ul>
-                                    <li class="active"><a href="index.html">Acceuil</a></li>
                                     <li class="has-dropdown">
                                         <a href="{{ path('youssef_front_recherche_offres') }}">Offres</a>
                                         <ul class="dropdown">
@@ -141,9 +141,15 @@
                                         </ul>
                                     </li>
                                     <li class="has-dropdown">
-                                        <a href="blog.html">Rendez-vous</a>
+                                        <a href="{{ path('demande_index') }}">Demandes</a>
                                         <ul class="dropdown">
-                                            <li><a href="blog-single.html">Prendre un rendez vous</a></li>
+                                            <li><a href="{{ path('demande_index') }}">Effectuer une demande</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-dropdown">
+                                        <a href="{{ path('reclamation_index') }}">Reclamation</a>
+                                        <ul class="dropdown">
+                                            <li><a href="{{ path('reclamation_index') }}">Effectuer une reclamation</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="contact.html">Contact</a></li>

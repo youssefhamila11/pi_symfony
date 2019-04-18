@@ -11,9 +11,13 @@ stat:
     defaults: { _controller: HayderBundle:Default:stat }
 
 pdf:
-    path:     /pdf
+    path:     /pdf/{reponse}
     defaults: { _controller: HayderBundle:Default:pdf }
 
 recherche_demande:
     path:   /rech/dde
     defaults: { _controller: HayderBundle:Demande:recherche }
+
+recherche_reclamation:
+    path:   /rech/rec
+    defaults: { _controller: HayderBundle:Reclamation:recherche }

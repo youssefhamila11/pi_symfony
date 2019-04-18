@@ -2,6 +2,7 @@
 
 namespace HayderBundle\Controller;
 
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use HayderBundle\Entity\Reclamation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,8 +29,41 @@ class ReclamationBackController extends Controller
         );
 
 
+        $em = $this->getDoctrine()->getManager();
+        $demandes= $em->getRepository(Reclamation::class)->findAll();
+        $demande1 = 0;
+        $demande2 = 0;
+        $demande3 = 0;
+        foreach ($demandes as $demande) {
+            if($demande->getTypeReclamation() == "Réclamation sur remboursement effectué")
+                $demande1++;
+            if($demande->getTypeReclamation() == "Réclamation adhésion")
+                $demande2++;
+            if($demande->getTypeReclamation() == "Réclamation cotisations")
+                $demande3++;
+        }
+        $pieChart = new PieChart();
+        $pieChart->getData()->setArrayToDataTable(
+            [['Task', 'Hours per Day'],
+                ['Réclamation sur remboursement effectué',      $demande1],
+                ['Réclamation adhésion',      $demande2],
+                ['Réclamation cotisations',      $demande3]
+            ]
+        );
+        $pieChart->getOptions()->setTitle('Reclamations');
+        $pieChart->getOptions()->setHeight(500);
+        $pieChart->getOptions()->setWidth(900);
+        $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
+        $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+
+
+
         return $this->render('@HayderBundle/back/reclamation/index.html.twig', array(
             'reclamations' => $pagination,
+            'piechart'=>$pieChart,
         ));
     }
 

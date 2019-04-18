@@ -33,7 +33,6 @@
                 <th>Piecejointe</th>
                 <th>Date</th>
                 <th>Reponse</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody id="tabl">
@@ -49,16 +48,6 @@
                 <td>{{ demande.pieceJointe }}</td>
                 <td>{{ demande.date|date }}</td>
                 <td>{{ demande.reponse }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('demande_show', { 'id': demande.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('demande_edit', { 'id': demande.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
             </tr>
         {% endfor %}
         </tbody>
@@ -69,10 +58,19 @@
             <a href="{{ path('demande_new') }}">Create a new demande</a>
         </li>
     </ul></div></div></div></div></div>
+
+
 </center>
 
     <script>
         $(document).ready(function(){
+            $.get("{{ path('recherche_demande') }}",
+                {
+                    critere: $("#recherche").val()
+                },
+                function(data){
+                    $("#tabl").html(data);
+                });
             $("#recherche").change(function(){
                 $.get("{{ path('recherche_demande') }}",
                     {
